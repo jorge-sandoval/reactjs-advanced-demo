@@ -8,3 +8,19 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.page-sub-title {
+  font-size: 18px;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}

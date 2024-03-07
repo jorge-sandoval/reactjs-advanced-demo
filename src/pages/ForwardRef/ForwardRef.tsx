@@ -1,8 +1,7 @@
 import { FormEvent, useRef } from 'react';
-import './App.css';
 import CustomInput from './CustomInput';
 
-function App() {
+function ForwardRef() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -13,7 +12,8 @@ function App() {
 
   return (
     <>
-      <h1>forwardRef</h1>
+      <h1 className="page-title">Custom Input</h1>
+      <h2 className="page-sub-title">using forwardRef Hook</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="input">Query</label>
         <CustomInput type="text" ref={inputRef} />
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default ForwardRef;
