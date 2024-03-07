@@ -1,5 +1,6 @@
 import { FormEvent, useRef } from 'react';
 import './App.css';
+import CustomInput from './CustomInput';
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,7 +16,7 @@ function App() {
       <h1>forwardRef</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="input">Query</label>
-        <input type="text" ref={inputRef} />
+        <CustomInput type="text" ref={inputRef} />
         <button type="submit">Submit</button>
       </form>
     </>
