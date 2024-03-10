@@ -21,6 +21,11 @@ const NavLayout = () => {
               Custom Input
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link link-body-emphasis" to="/modals">
+              Modals
+            </NavLink>
+          </li>
         </ul>
       </nav>
 

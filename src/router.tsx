@@ -2,6 +2,7 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import NavLayout from './components/NavLayout';
 import RouteError from './components/RouterError';
 import ForwardRef from './pages/ForwardRef/ForwardRef';
+import Portals from './pages/Portals/Portals';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <h1> Home</h1> },
           { path: 'custom-input', element: <ForwardRef /> },
+          { path: 'modals', element: <Portals /> },
           { path: '*', element: <Navigate to="/" /> },
         ],
       },
