@@ -10,7 +10,7 @@ const InnerCustomInput: ForwardRefRenderFunction<
   HTMLInputElement,
   CustomInputProps
 > = (props, ref) => {
-  return <input type="text" {...props} ref={ref} />;
+  return <input {...props} ref={ref} />;
 };
 
 const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(

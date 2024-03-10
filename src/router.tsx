@@ -1,5 +1,5 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
-import NavLayout from './components/NavLayout/NavLayout';
+import NavLayout from './components/NavLayout';
 import RouteError from './components/RouterError';
 import ForwardRef from './pages/ForwardRef/ForwardRef';
 
