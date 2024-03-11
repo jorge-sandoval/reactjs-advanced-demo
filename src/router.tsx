@@ -4,6 +4,7 @@ import RouteError from './components/RouterError';
 import ForwardRef from './pages/ForwardRef/ForwardRef';
 import Portals from './pages/Portals/Portals';
 import DatePickerPage from './pages/DatePicker';
+import TooltipPage from './pages/Tooltip';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
           { path: 'custom-input', element: <ForwardRef /> },
           { path: 'modals', element: <Portals /> },
           { path: 'date-picker', element: <DatePickerPage /> },
+          { path: 'tooltip', element: <TooltipPage /> },
           { path: '*', element: <Navigate to="/" /> },
         ],
       },

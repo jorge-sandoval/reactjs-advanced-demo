@@ -3,6 +3,7 @@ const navElements = [
   { name: 'Custom Input', link: '/custom-input' },
   { name: 'Modals', link: '/modals' },
   { name: 'Date Picker', link: '/date-picker' },
+  { name: 'Tooltip', link: '/tooltip' },
 ];
 
 export default navElements;
