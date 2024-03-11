@@ -4,6 +4,7 @@ import {
   ScrollRestoration,
   useNavigation,
 } from 'react-router-dom';
+import navElements from '../models/nav-elements';
 
 const NavLayout = () => {
   const { state } = useNavigation();
@@ -13,19 +14,16 @@ const NavLayout = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-primary-subtle">
         <ul className="nav nav-underline container-fluid justify-content-center">
-          <NavLink className="nav-item nav-link link-body-emphasis" to="/">
-            Home
-          </NavLink>
-          <li className="nav-item">
-            <NavLink className="nav-link link-body-emphasis" to="/custom-input">
-              Custom Input
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link link-body-emphasis" to="/modals">
-              Modals
-            </NavLink>
-          </li>
+          {navElements.map((element, index) => (
+            <li key={index} className="nav-item">
+              <NavLink
+                className="nav-link link-body-emphasis"
+                to={element.link}
+              >
+                {element.name}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
 
