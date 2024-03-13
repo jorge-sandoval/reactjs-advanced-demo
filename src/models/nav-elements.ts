@@ -4,6 +4,7 @@ const navElements = [
   { name: 'Modals', link: '/modals' },
   { name: 'Date Picker', link: '/date-picker' },
   { name: 'Tooltip', link: '/tooltip' },
+  { name: 'Infinite Scroll', link: '/infinite-scroll' },
 ];
 
 export default navElements;

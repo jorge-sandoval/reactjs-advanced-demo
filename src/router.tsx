@@ -5,6 +5,7 @@ import ForwardRef from './pages/ForwardRef/ForwardRef';
 import Portals from './pages/Portals/Portals';
 import DatePickerPage from './pages/DatePicker';
 import TooltipPage from './pages/Tooltip';
+import InfiniteScrollPage from './pages/InfiniteScroll/InfiniteScrollPage';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
           { path: 'modals', element: <Portals /> },
           { path: 'date-picker', element: <DatePickerPage /> },
           { path: 'tooltip', element: <TooltipPage /> },
+          { path: 'infinite-scroll', element: <InfiniteScrollPage /> },
           { path: '*', element: <Navigate to="/" /> },
         ],
       },
