@@ -5,6 +5,7 @@ const navElements = [
   { name: 'Date Picker', link: '/date-picker' },
   { name: 'Tooltip', link: '/tooltip' },
   { name: 'Infinite Scroll', link: '/infinite-scroll' },
+  { name: 'Calendar', link: '/calendar' },
 ];
 
 export default navElements;
