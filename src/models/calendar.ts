@@ -1,3 +1,6 @@
+import { UnionOmit } from "../utils/types";
+import { ModalProps } from "./modal";
+
 const EVENT_COLORS = ['red', 'blue', 'green'];
 
 export type CalendarEvent = {
@@ -23,5 +26,21 @@ export interface CalendarDayProps {
   selectedMonth: Date;
   events?: [];
 }
+
+export type CalendarEventFormProps = {
+  onSubmit: (event: UnionOmit<CalendarEvent, 'id'>) => void;
+} & (
+  { 
+    onDelete: () => void;
+    event: CalendarEvent;
+    date?: never;
+  } | {
+    onDelete?: never;
+    event?: never;
+    date: Date;
+  }
+) & (
+  Omit<ModalProps, 'children'>
+);
 
 export default EVENT_COLORS;
