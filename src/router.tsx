@@ -7,6 +7,7 @@ import DatePickerPage from './pages/DatePicker';
 import TooltipPage from './pages/Tooltip';
 import InfiniteScrollPage from './pages/InfiniteScroll/InfiniteScrollPage';
 import CalendarPage from './pages/Calendar/CalendarPage';
+import CalendarContextProvider from './context/calendarContextProvider';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,14 @@ const router = createBrowserRouter([
           { path: 'date-picker', element: <DatePickerPage /> },
           { path: 'tooltip', element: <TooltipPage /> },
           { path: 'infinite-scroll', element: <InfiniteScrollPage /> },
-          { path: 'calendar', element: <CalendarPage /> },
+          {
+            path: 'calendar',
+            element: (
+              <CalendarContextProvider>
+                <CalendarPage />
+              </CalendarContextProvider>
+            ),
+          },
           { path: '*', element: <Navigate to="/" /> },
         ],
       },

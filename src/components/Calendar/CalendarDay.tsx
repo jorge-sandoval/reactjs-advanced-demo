@@ -1,19 +1,45 @@
-import { endOfDay, isBefore, isSameMonth, isToday } from 'date-fns';
+import { endOfDay, isBefore, isSameMonth, isToday, parse } from 'date-fns';
 import cssClass from '../../utils/cssClass';
 import formatDate from '../../utils/formatDate';
 import { CalendarDayProps } from '../../models/calendar';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import EventFormModal from './EventFormModal';
+import useCalendarEvents from '../../hooks/useCalendarEvents';
+import CalendarEventView from './CalendarEventView';
 
 export default function CalendarDay({
   day,
   selectedMonth,
   showWeekName,
-  events = [],
+  events,
 }: CalendarDayProps) {
   const [isNewEventModalOpen, setIsNewEventModalOpen] = useState(false);
 
-  const handleAddEvent = () => {};
+  const { addEvent } = useCalendarEvents();
+
+  const sortedEvents = useMemo(() => {
+    return [...events].sort((a, b) => {
+      if (a.allDay && b.allDay) return 0;
+      if (a.allDay && !b.allDay) return -1;
+      if (!a.allDay && b.allDay) return 1;
+
+      const startTimeA = a.startTime
+        ? parse(a.startTime, 'HH:mm', a.date)
+        : null;
+      const startTimeB = b.startTime
+        ? parse(b.startTime, 'HH:mm', b.date)
+        : null;
+
+      if (startTimeA && !startTimeB) return -1;
+      if (!startTimeA && startTimeB) return 1;
+
+      if (startTimeA && startTimeB) {
+        return startTimeA.getTime() - startTimeB.getTime();
+      }
+
+      return 0;
+    });
+  }, [events]);
 
   return (
     <>
@@ -41,17 +67,10 @@ export default function CalendarDay({
           </button>
         </div>
 
-        {events.length > 0 && (
+        {sortedEvents.length > 0 && (
           <div className="events">
-            <button className="all-day-event green event">
-              <div className="event-name">Short</div>
-            </button>
-            {events.map(() => (
-              <button className="event">
-                <div className="color-dot blue"></div>
-                <div className="event-time">7am</div>
-                <div className="event-name">Event Name</div>
-              </button>
+            {sortedEvents.map((e) => (
+              <CalendarEventView event={e} />
             ))}
           </div>
         )}
@@ -60,7 +79,7 @@ export default function CalendarDay({
         isOpen={isNewEventModalOpen}
         date={day}
         onClose={() => setIsNewEventModalOpen(false)}
-        onSubmit={handleAddEvent}
+        onSubmit={addEvent}
       />
     </>
   );

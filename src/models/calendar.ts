@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { UnionOmit } from "../utils/types";
 import { ModalProps } from "./modal";
 
@@ -24,7 +25,7 @@ export interface CalendarDayProps {
   day: Date;
   showWeekName: boolean;
   selectedMonth: Date;
-  events?: [];
+  events: CalendarEvent[];
 }
 
 export type CalendarEventFormProps = {
@@ -42,5 +43,15 @@ export type CalendarEventFormProps = {
 ) & (
   Omit<ModalProps, 'children'>
 );
+
+
+export interface CalendarContextProps {
+  events: CalendarEvent[];
+  addEvent: (event: UnionOmit<CalendarEvent, 'id'>) => void;
+}
+
+export interface CalendarContextProviderProps {
+  children: ReactNode;
+}
 
 export default EVENT_COLORS;

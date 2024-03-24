@@ -23,7 +23,6 @@ export default function EventFormModal({
   const nameRef = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = (e: FormEvent) => {
-    console.log('Form submitted');
     e.preventDefault();
 
     const name = nameRef.current?.value;
@@ -32,7 +31,7 @@ export default function EventFormModal({
       !(event?.date || date) ||
       !name ||
       !selectedColor ||
-      (isAllDayCheck && (!startTime || !endTime))
+      (!isAllDayCheck && (!startTime || !endTime))
     ) {
       return;
     }
@@ -59,6 +58,15 @@ export default function EventFormModal({
     onSubmit(newEvent);
 
     modalProps.onClose();
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setSelectedColor(null);
+    setIsAllDayCheck(false);
+    setStartTime('');
+    setEndTime('');
+    nameRef.current!.value = '';
   };
 
   return (
