@@ -36,7 +36,7 @@ export default function EventFormModal({
       return;
     }
 
-    let newEvent: UnionOmit<CalendarEvent, 'id'>;
+    let formEvent: UnionOmit<CalendarEvent, 'id'>;
 
     const eventProps = {
       name,
@@ -45,9 +45,9 @@ export default function EventFormModal({
     };
 
     if (isAllDayCheck) {
-      newEvent = { ...eventProps, allDay: true };
+      formEvent = { ...eventProps, allDay: true };
     } else {
-      newEvent = {
+      formEvent = {
         ...eventProps,
         allDay: false,
         startTime,
@@ -55,10 +55,13 @@ export default function EventFormModal({
       };
     }
 
-    onSubmit(newEvent);
+    onSubmit(formEvent);
 
     modalProps.onClose();
-    resetForm();
+
+    if (isNew) {
+      resetForm();
+    }
   };
 
   const resetForm = () => {
@@ -81,7 +84,13 @@ export default function EventFormModal({
       <form onSubmit={handleFormSubmit}>
         <div className="form-group">
           <label htmlFor={`${formId}-name`}>Name</label>
-          <input required type="text" id={`${formId}-name`} ref={nameRef} />
+          <input
+            required
+            type="text"
+            id={`${formId}-name`}
+            ref={nameRef}
+            defaultValue={event?.name}
+          />
         </div>
         <div className="form-group checkbox">
           <input

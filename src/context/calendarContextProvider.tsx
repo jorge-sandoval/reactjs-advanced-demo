@@ -18,8 +18,24 @@ export default function CalendarContextProvider({
     ]);
   };
 
+  const updateEvent = (id: string, event: UnionOmit<CalendarEvent, 'id'>) => {
+    setEvents((prevEvents) =>
+      prevEvents.map((prevEvent) =>
+        prevEvent.id === id ? { ...event, id } : prevEvent
+      )
+    );
+  };
+
+  const deleteEvent = (eventId: string) => {
+    setEvents((prevEvents) =>
+      prevEvents.filter((prevEvent) => prevEvent.id !== eventId)
+    );
+  };
+
   return (
-    <CalendarContext.Provider value={{ events, addEvent }}>
+    <CalendarContext.Provider
+      value={{ events, addEvent, updateEvent, deleteEvent }}
+    >
       {children}
     </CalendarContext.Provider>
   );

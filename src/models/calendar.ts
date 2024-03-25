@@ -48,6 +48,8 @@ export type CalendarEventFormProps = {
 export interface CalendarContextProps {
   events: CalendarEvent[];
   addEvent: (event: UnionOmit<CalendarEvent, 'id'>) => void;
+  updateEvent: (id: string, event: UnionOmit<CalendarEvent, 'id'>) => void;
+  deleteEvent: (id: string) => void;
 }
 
 export interface CalendarContextProviderProps {

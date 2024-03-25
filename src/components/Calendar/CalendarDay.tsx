@@ -70,7 +70,7 @@ export default function CalendarDay({
         {sortedEvents.length > 0 && (
           <div className="events">
             {sortedEvents.map((e) => (
-              <CalendarEventView event={e} />
+              <CalendarEventView event={e} key={e.id} />
             ))}
           </div>
         )}
