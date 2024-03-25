@@ -1,11 +1,12 @@
 import { endOfDay, isBefore, isSameMonth, isToday, parse } from 'date-fns';
 import cssClass from '../../utils/cssClass';
 import formatDate from '../../utils/formatDate';
-import { CalendarDayProps } from '../../models/calendar';
+import { CalendarDayProps, CalendarEvent } from '../../models/calendar';
 import { useMemo, useState } from 'react';
 import EventFormModal from './EventFormModal';
 import useCalendarEvents from '../../hooks/useCalendarEvents';
 import CalendarEventView from './CalendarEventView';
+import OverflowContainer from '../OverflowContainer';
 
 export default function CalendarDay({
   day,
@@ -68,11 +69,17 @@ export default function CalendarDay({
         </div>
 
         {sortedEvents.length > 0 && (
-          <div className="events">
-            {sortedEvents.map((e) => (
-              <CalendarEventView event={e} key={e.id} />
-            ))}
-          </div>
+          <OverflowContainer<CalendarEvent>
+            className="events"
+            items={sortedEvents}
+            getKey={(event) => event.id}
+            renderItem={(event) => <CalendarEventView event={event} />}
+            renderOverflow={(amount) => (
+              <>
+                <button className="events-view-more-btn">+{amount} More</button>
+              </>
+            )}
+          />
         )}
       </div>
       <EventFormModal
