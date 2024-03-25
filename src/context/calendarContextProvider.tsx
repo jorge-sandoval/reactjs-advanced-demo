@@ -1,15 +1,18 @@
-import { useState } from 'react';
 import CalendarContext from './calendarContext';
 import {
   CalendarContextProviderProps,
   CalendarEvent,
 } from '../models/calendar';
 import { UnionOmit } from '../utils/types';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function CalendarContextProvider({
   children,
 }: CalendarContextProviderProps) {
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [events, setEvents] = useLocalStorage<CalendarEvent[]>(
+    'MY_CALENDAR_EVENTS',
+    []
+  );
 
   const addEvent = (event: UnionOmit<CalendarEvent, 'id'>) => {
     setEvents((prevEvents) => [
