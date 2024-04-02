@@ -48,11 +48,25 @@ export default function Modal({
       )}
     >
       <div className="modal-dialog w-100">
-        <div className="modal-content">
-          <div className="modal-body">{children}</div>
-        </div>
+        <div className="modal-content">{children}</div>
       </div>
     </div>,
     document.querySelector('#modal-container') as HTMLElement
   );
+}
+
+Modal.Header = Header;
+Modal.Body = Body;
+Modal.Footer = Footer;
+
+function Header({ children }: { children: ReactNode }) {
+  return <div className="modal-header">{children}</div>;
+}
+
+function Body({ children }: { children: ReactNode }) {
+  return <div className="modal-body">{children}</div>;
+}
+
+function Footer({ children }: { children: ReactNode }) {
+  return <div className="modal-footer">{children}</div>;
 }
