@@ -74,38 +74,53 @@ export default function EventFormModal({
 
   return (
     <Modal {...modalProps}>
-      <div className="modal-title">
+      <div className="fs-4 mb-2 d-flex justify-content-between align-items-center">
         <div>{isNew ? 'Add' : 'Edit'} Event</div>
-        <small>{formatDate(date || event.date, { dateStyle: 'short' })}</small>
-        <button className="close-btn" onClick={modalProps.onClose}>
-          &times;
-        </button>
+        <small className="text-dark">
+          {formatDate(date || event.date, { dateStyle: 'short' })}
+        </small>
+        <button className="fs-6 btn-close" onClick={modalProps.onClose} />
       </div>
-      <form onSubmit={handleFormSubmit}>
-        <div className="form-group">
-          <label htmlFor={`${formId}-name`}>Name</label>
-          <input
-            required
-            type="text"
-            id={`${formId}-name`}
-            ref={nameRef}
-            defaultValue={event?.name}
-          />
-        </div>
-        <div className="form-group checkbox">
-          <input
-            type="checkbox"
-            id={`${formId}-all-day`}
-            checked={isAllDayCheck}
-            onChange={(e) => setIsAllDayCheck(e.target.checked)}
-          />
-          <label htmlFor={`${formId}-all-day`}>All Day?</label>
+      <form onSubmit={handleFormSubmit} className="d-flex flex-column gap-2">
+        <div className="row">
+          <div className="col">
+            <label className="form-label" htmlFor={`${formId}-name`}>
+              Name
+            </label>
+            <input
+              id={`${formId}-name`}
+              type="text"
+              className="form-control"
+              ref={nameRef}
+              defaultValue={event?.name}
+              required
+            />
+          </div>
         </div>
         <div className="row">
-          <div className="form-group">
-            <label htmlFor={`${formId}-start-time`}>Start Time</label>
+          <div className="col">
+            <div className="form-check">
+              <input
+                id={`${formId}-all-day`}
+                type="checkbox"
+                className="form-check-input"
+                checked={isAllDayCheck}
+                onChange={(e) => setIsAllDayCheck(e.target.checked)}
+              />
+              <label className="form-check-label" htmlFor={`${formId}-all-day`}>
+                All Day?
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-6">
+            <label className="form-label" htmlFor={`${formId}-start-time`}>
+              Start Time
+            </label>
             <input
               id={`${formId}-start-time`}
+              className="form-control"
               type="time"
               value={startTime}
               required={!isAllDayCheck}
@@ -113,10 +128,13 @@ export default function EventFormModal({
               onChange={(e) => setStartTime(e.target.value)}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor={`${formId}-end-time`}>End Time</label>
+          <div className="col-sm-6">
+            <label className="form-label" htmlFor={`${formId}-end-time`}>
+              End Time
+            </label>
             <input
               id={`${formId}-end-time`}
+              className="form-control"
               type="time"
               value={endTime}
               required={!isAllDayCheck}
@@ -125,9 +143,9 @@ export default function EventFormModal({
             />
           </div>
         </div>
-        <div className="form-group">
-          <label>Color</label>
-          <div className="row left">
+        <div className="row">
+          <label className="form-label">Color</label>
+          <div className="col">
             {EVENT_COLORS.map((color) => (
               <Fragment key={color}>
                 <input
@@ -139,25 +157,35 @@ export default function EventFormModal({
                   checked={selectedColor === color}
                   onChange={() => setSelectedColor(color)}
                 />
-                <label htmlFor={`${formId}-color-${color}`}>
-                  <span className="sr-only">{color}</span>
-                </label>
+                <label
+                  className="me-1"
+                  htmlFor={`${formId}-color-${color}`}
+                ></label>
               </Fragment>
             ))}
           </div>
         </div>
         <div className="row">
-          <button
-            className="btn btn-success"
-            type="submit"
-            onClick={handleFormSubmit}
-          >
-            {isNew ? 'Add' : 'Edit'}
-          </button>
-          {!isNew && onDelete && (
-            <button className="btn btn-delete" type="button" onClick={onDelete}>
-              Delete
+          {isNew && <div className="col-sm-6"></div>}
+          <div className="col-sm-6">
+            <button
+              className="w-100 btn btn-primary"
+              type="submit"
+              onClick={handleFormSubmit}
+            >
+              {isNew ? 'Add' : 'Edit'}
             </button>
+          </div>
+          {!isNew && (
+            <div className="col-sm-6">
+              <button
+                className="w-100 btn btn-danger"
+                type="button"
+                onClick={onDelete}
+              >
+                Delete
+              </button>
+            </div>
           )}
         </div>
       </form>

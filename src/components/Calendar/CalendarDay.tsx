@@ -45,26 +45,36 @@ export default function CalendarDay({
     });
   }, [events]);
 
+  const oldMonthDay = isBefore(endOfDay(day), new Date());
   return (
     <>
       <div
         className={cssClass(
-          'day',
-          !isSameMonth(day, selectedMonth) && 'non-month-day',
-          isBefore(endOfDay(day), new Date()) && 'old-month-day'
+          'day bg-white p-1 overflow-hidden d-flex flex-column',
+          !isSameMonth(day, selectedMonth) && 'opacity-75'
         )}
       >
-        <div className="day-header">
+        <div
+          className={cssClass(
+            oldMonthDay && 'opacity-50',
+            'd-flex flex-column align-items-center position-relative mb-1'
+          )}
+        >
           {showWeekName && (
-            <div className="week-name">
+            <div className="tiny-text text-uppercase fw-bold text-muted mb-2">
               {formatDate(day, { weekday: 'short' })}
             </div>
           )}
-          <div className={cssClass('day-number', isToday(day) && 'today')}>
+          <div
+            className={cssClass(
+              'd-flex justify-content-center align-items-center',
+              isToday(day) && 'badge rounded-pill text-bg-primary'
+            )}
+          >
             {formatDate(day, { day: 'numeric' })}
           </div>
           <button
-            className="add-event-btn"
+            className="btn btn-sm btn-outline-light rounded-circle position-absolute end-0 top-0 py-0 px-1"
             onClick={() => setIsNewEventModalOpen(true)}
           >
             +
@@ -73,14 +83,17 @@ export default function CalendarDay({
 
         {sortedEvents.length > 0 && (
           <OverflowContainer<CalendarEvent>
-            className="events"
+            className={cssClass(
+              oldMonthDay && 'opacity-50',
+              'd-flex flex-column gap-2 flex-grow-1 overflow-hidden'
+            )}
             items={sortedEvents}
             getKey={(event) => event.id}
             renderItem={(event) => <CalendarEventView event={event} />}
             renderOverflow={(amount) => (
               <>
                 <button
-                  className="events-view-more-btn"
+                  className="w-100 btn btn-link fw-bold text-dark text-decoration-none p-0"
                   onClick={() => setIsViewMoreEventsModalOpen(true)}
                 >
                   +{amount} More

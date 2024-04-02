@@ -14,13 +14,13 @@ export default function ViewMoreEventsModal({
 }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="modal-title">
-        <small>{formatDate(events[0].date, { dateStyle: 'short' })}</small>
-        <button className="close-btn" onClick={onClose}>
-          &times;
-        </button>
+      <div className="fs-4 mb-2 d-flex justify-content-between align-items-center">
+        <small className="text-dark">
+          {formatDate(events[0].date, { dateStyle: 'short' })}
+        </small>
+        <button className="fs-6 btn-close" onClick={onClose} />
       </div>
-      <div className="events">
+      <div className="d-flex flex-column gap-2 flex-grow-1 overflow-hidden">
         {events.map((event) => (
           <CalendarEventView event={event} key={event.id} />
         ))}

@@ -41,10 +41,17 @@ export default function Modal({
   return createPortal(
     <div
       onAnimationEnd={() => setIsClosing(false)}
-      className={cssClass('modal', isClosing && 'closing')}
+      className={cssClass(
+        'modal modal-sheet position-fixed',
+        'd-flex justify-content-center align-items-center',
+        isClosing && 'closing'
+      )}
     >
-      <div className="overlay" onClick={() => onClose()} />
-      <div className="modal-body">{children}</div>
+      <div className="modal-dialog w-100">
+        <div className="modal-content">
+          <div className="modal-body">{children}</div>
+        </div>
+      </div>
     </div>,
     document.querySelector('#modal-container') as HTMLElement
   );

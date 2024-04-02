@@ -10,24 +10,44 @@ export default function CalendarEventView({ event }: { event: CalendarEvent }) {
   const [isEditEventModalOpen, setIsEditEventModalOpen] = useState(false);
   const { updateEvent, deleteEvent } = useCalendarEvents();
 
+  const eventClass =
+    'w-100 btn d-flex justify-content-start align-items-center overflow-hidden text-nowrap py-0';
+
+  const btnColor = {
+    green: 'btn-success',
+    red: 'btn-danger',
+    blue: 'btn-primary bg-info border-info',
+  };
+
+  const dotColor = {
+    green: 'bg-success',
+    red: 'bg-danger',
+    blue: 'bg-info',
+  };
+
   return (
     <>
       {event.allDay ? (
         <button
-          className={cssClass('event', 'all-day-event', event.color)}
+          className={cssClass(eventClass, 'px-1', btnColor[event.color])}
           onClick={() => setIsEditEventModalOpen(true)}
         >
-          <div className="event-name">{event.name}</div>
+          <div className="overflow-hidden">{event.name}</div>
         </button>
       ) : (
-        <button className="event" onClick={() => setIsEditEventModalOpen(true)}>
-          <div className={cssClass('color-dot', event.color)}></div>
-          <div className="event-time">
+        <button
+          className={cssClass(eventClass, 'px-0')}
+          onClick={() => setIsEditEventModalOpen(true)}
+        >
+          <div
+            className={cssClass('color-dot me-1', dotColor[event.color])}
+          ></div>
+          <div className="text-muted me-1">
             {formatDate(parse(event.startTime, 'HH:mm', event.date), {
               timeStyle: 'short',
             })}
           </div>
-          <div className="event-name">{event.name}</div>
+          <div className="overflow-hidden">{event.name}</div>
         </button>
       )}
       <EventFormModal

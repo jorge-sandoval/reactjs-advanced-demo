@@ -25,26 +25,29 @@ export default function Calendar({ value }: { value?: Date }) {
 
   return (
     <>
-      <div className="calendar">
-        <div className="header">
-          <button className="btn" onClick={() => setSelectedMonth(new Date())}>
+      <div className="h-100 d-flex flex-column text-dark">
+        <div className="d-flex align-items-center py-3">
+          <button
+            className="btn btn-outline-primary me-2"
+            onClick={() => setSelectedMonth(new Date())}
+          >
             Today
           </button>
           <div>
             <button
-              className="month-change-btn"
+              className="month-button"
               onClick={() => setSelectedMonth((m) => addMonths(m, -1))}
             >
               &lt;
             </button>
             <button
-              className="month-change-btn"
+              className="month-button"
               onClick={() => setSelectedMonth((m) => addMonths(m, 1))}
             >
               &gt;
             </button>
           </div>
-          <span className="month-title">
+          <span className="fs-4 fw-bold">
             {formatDate(selectedMonth, { month: 'long', year: 'numeric' })}
           </span>
         </div>
