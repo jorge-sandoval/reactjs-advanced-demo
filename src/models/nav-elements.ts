@@ -6,6 +6,7 @@ const navElements = [
   { name: 'Tooltip', link: '/tooltip' },
   { name: 'Infinite Scroll', link: '/infinite-scroll' },
   { name: 'Calendar', link: '/calendar' },
+  { name: 'Toast', link: '/toast' },
 ];
 
 export default navElements;

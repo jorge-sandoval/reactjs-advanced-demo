@@ -8,6 +8,8 @@ import TooltipPage from './pages/Tooltip';
 import InfiniteScrollPage from './pages/InfiniteScroll/InfiniteScrollPage';
 import CalendarPage from './pages/Calendar/CalendarPage';
 import CalendarContextProvider from './context/calendarContextProvider';
+import ToastPage from './pages/ToastPage';
+import ToastProvider from './context/ToastProvider';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
               <CalendarContextProvider>
                 <CalendarPage />
               </CalendarContextProvider>
+            ),
+          },
+          {
+            path: 'toast',
+            element: (
+              <ToastProvider>
+                <ToastPage />
+              </ToastProvider>
             ),
           },
           { path: '*', element: <Navigate to="/" /> },
